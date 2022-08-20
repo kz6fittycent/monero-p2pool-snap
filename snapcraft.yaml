@@ -1,0 +1,47 @@
+name: p2pool
+adopt-info: p2pool
+summary: p2pool is a decentralized pool for Monero mining.
+description: |
+  Decentralized pool for Monero mining. Pool status and monitoring 
+  pages can be found at https://p2pool.io/, https://p2pool.io/mini/ 
+  and https://p2pool.observer/ 
+    
+license: GPL-3.0
+
+base: core20
+grade: stable
+confinement: strict
+compression: lzo
+
+architectures:
+  - build-on: amd64    
+    run-on: [amd64, arm64]
+
+apps:
+  p2pool:
+    command: bin/p2pool
+    plugs:
+      - home
+      - network
+      - network-bind
+      
+parts:
+  p2pool:
+    source: https://github.com/SChernykh/p2pool
+    source-type: git
+    plugin: cmake
+      
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git describe --tags | sed 's/^v//' | cut -d "-" -f1)"
+      
+    build-packages:
+      - cmake 
+      - libuv1-dev 
+      - libzmq3-dev 
+      - libsodium-dev 
+      - libpgm-dev 
+      - libnorm-dev 
+      - libgss-dev 
+      - libcurl4-openssl-dev 
+      - libidn2-0-dev

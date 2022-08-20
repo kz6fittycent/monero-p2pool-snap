@@ -13,6 +13,10 @@ grade: stable
 confinement: strict
 compression: lzo
 
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  
 apps:
   p2pool:
     command: bin/p2pool

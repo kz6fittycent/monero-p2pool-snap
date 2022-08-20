@@ -19,7 +19,7 @@ architectures:
 
 apps:
   p2pool:
-    command: bin/p2pool
+    command: usr/bin/p2pool
     plugs:
       - home
       - network
@@ -30,6 +30,8 @@ parts:
     source: https://github.com/SChernykh/p2pool
     source-type: git
     plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
       
     override-pull: |
       snapcraftctl pull

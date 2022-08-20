@@ -24,8 +24,7 @@ apps:
       - home
       - network
       - network-bind
-      - firewall-control
-      
+  
 parts:
   p2pool:
     source: https://github.com/SChernykh/p2pool
